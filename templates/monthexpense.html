@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<nav class="navbar navbar-expand-sm bg-light">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="/register">Register</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/">Logout</a>
+    </li>    
+    <li class="nav-item">
+      <a class="nav-link" href="/dashboard/expenses">Expenses</a>
+    </li>
+  </ul>
+
+</nav>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+	<br>
+<table class="table table-bordered table-sm col-sm-4">
+	<thead>
+	<tr>
+		<th>Month</th>
+		<th>Amount(Rs)</th>
+	</tr>	
+	</thead>
+	<tbody>
+	<tr>	
+	    <td>{{ result["month"] }}</td>	       
+	    <td>{{ result["amount"] }}</td>	       
+	</tr>
+	<p>You fu*ckin spent <bold>{{ result["amount"] }}</bold> in the month of {{ result["month"] }} ({{ result["year"] }})</p>
+	</tbody>
+</table>
+<a class="align-center" href="/dashboard">(Enter New Data)</a>
+</div>
+
+</body>
+</html>

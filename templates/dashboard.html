@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <div>
+<nav class="navbar navbar-expand-sm bg-light">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="/register">Register</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/">Logout</a>
+    </li>    
+    <li class="nav-item">
+      <a class="nav-link" href="/dashboard/expenses">Expenses</a>
+    </li>
+  </ul>
+
+</nav>
+    </table>
+  </div>
+  <script type="text/javascript">
+      $(document).ready(function(){
+        $("#submit").click(function(e){
+            $.ajax({
+              data:{
+
+                date: $('#date').val(),
+                purpose: $('#purpose').val(),
+                amount: $('#amount').val()
+              },
+              type: 'POST',
+              url: '/dashboard_2'
+            })
+            .done(function(data){
+              if (data.error){
+                $('#erroralert').text(data.error).show();
+                $('#successalert').hide();
+              }
+              else{
+                $('#successalert').text(data.success).show();
+                $('#erroralert').hide();
+              }
+
+            });
+            e.preventDefault();
+
+        });
+
+      });
+  </script>
+</head>
+<body>
+
+<div class="container">
+  <h2 class='text-center'>Enter Expenses</h2><br>
+  <div class="col-sm-12 col-sm offset-1">
+  <form id="entry_form"class="form-inline" action="./dashboard_2">
+    <label for="date" class="mb-2 mr-sm-2">Date:</label>
+    <input type="date" class="form-control mb-2 mr-sm-2" id="date" placeholder="Date" name="date" required></hr>
+    <label for="purpose" class="mb-2 mr-sm-2">Purpose:</label>
+    <input type="text-area" class="form-control mb-2 mr-sm-2" id="purpose" placeholder="Purpose" name="purpose" required>
+    <label for="amount" class="mb-2 mr-sm-2">Amount:</label>
+    <input type="text" class="form-control mb-2 mr-sm-2"placeholder="Amount" id="amount" name="amount" required>
+    <div class="form-check">
+    </div>
+    <button id="submit" name="submit" type="submit" class="btn btn-primary mb-2 mr-sm-2">Submit</button>
+  </form>
+</div>
+  <br>
+  <div id='successalert' class="alert alert-success" role="alert" style="display: none;"></div>
+  <div id='erroralert' class="alert alert-danger" role="alert" style="display: none;"></div>
+</div>
+
+
+<div class="container">
+  <h4 class='text-center mb-2 mr-sm-2'>Monthly Expenditure</h4>
+  <p class='text-center mb-2 mr-sm-2'>(Enter your date to get expenses by month)</p>
+  <div class="col-sm-12 col-sm offset-4">
+  <form  method="POST" id="month_form" class="form-inline" action="./dashboard/month_exp">  
+    <br>
+    <label for="date" class="mb-2 mr-sm-2">Date:</label>
+    <input type="date" class="form-control mb-2 mr-sm-2" id="date_month" placeholder="Date" name="date_month" required></hr>
+    <div class="form-check">
+    </div>
+    <button id="submit" name="submit" type="submit" class="btn btn-primary mb-2 mr-sm-2">Submit</button>
+  </form>
+  <br>
+  </div>
+</div>
+
+<div class="container">
+  <h4 class='text-center mb-2 mr-sm-2'>Date Expenditure</h4>
+  <p class='text-center mb-2 mr-sm-2'>(Enter your date and get total exp on that date)</p>
+  <div class="col-sm-12 col-sm offset-4">
+  <form  method="POST" id="date_form" class="form-inline" action="./dashboard/date_exp">  
+    <br>
+    <label for="date" class="mb-2 mr-sm-2">Date:</label>
+    <input type="date" class="form-control mb-2 mr-sm-2" id="date_day" placeholder="Date" name="date_day" required></hr>
+    <div class="form-check">
+    </div>
+    <button id="submit" name="submit" type="submit" class="btn btn-primary mb-2 mr-sm-2">Submit</button>
+  </form>
+
+</div>
+
+</body>
+</html>
