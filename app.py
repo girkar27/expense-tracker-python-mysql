@@ -83,16 +83,18 @@ def register_user():
 def expenses():
     data = model.show_exp()
     exp_list = []
-    for row in data:
-        dict1 = {
-            'expenseid': row[0],
-            'date': row[1],     
-            'purpose': row[2],     
-            'amount': row[3]     
-        }
-        exp_list.append(dict1)
-    
-    return render_template('expenses.html', result=exp_list)
+    if data != "None":
+        for row in data:
+            dict1 = {
+                'expenseid': row[0],
+                'date': row[1],     
+                'purpose': row[2],     
+                'amount': row[3]     
+            }
+            exp_list.append(dict1)
+        return render_template('expenses.html', result=exp_list)
+    else:
+        return render_template('expenses.html', result=data)
 
 @app.route('/dashboard/date_exp', methods=['POST'])
 def date_exp():
@@ -131,8 +133,9 @@ def month_exp():
 
 @app.route('/delete_data', methods=['GET'])
 def delete_data():
-    model.truncate()
+    delete = model.truncate()
     return "DELETED ALL DATA"
+
 
 @app.route('/dataexported', methods=['GET'])
 def dataexported():

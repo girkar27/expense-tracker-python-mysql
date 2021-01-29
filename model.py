@@ -103,7 +103,6 @@ def truncate():
     cur.execute(sql)
 
 
-
 def write_csv():
     now = datetime.now()
     formatted_date = now.strftime('%Y-%m-%d') 

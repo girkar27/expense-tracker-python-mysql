@@ -10,6 +10,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
+{% if result != "None"  %}
 <div class="container">
 	<h2 class="text-center">Expenses</h2>
 <table class="table table-bordered table-sm">
@@ -25,15 +26,18 @@
 {% for row in result %}
 	<tr>
 	{% for value in row %}	
-	       <th>{{ row[value] }}</th>
+	       <td>{{ row[value] }}</td>
 	{% endfor %}	       
 	</tr>
 	</tbody>
 {% endfor %}
 </table>
 <a class="align-center" href="/dashboard">(Enter New Data)</a>
-<a class="align-center" action= "./delete_data">(DELETE ALL ENTRIES)</a>
-
+<a class="align-center" href= "/delete_data">(DELETE ALL ENTRIES)</a>
+{% else %}
+<p class="text-danger">No Record Found</p>
+<a href="/dashboard">(Enter New Data)</a>
+{% endif %}
 </div>
 </body>
 </html>
